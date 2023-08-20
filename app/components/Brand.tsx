@@ -5,6 +5,7 @@ import { Alfa_Slab_One } from "next/font/google";
 const brandFont = Alfa_Slab_One({
   weight: "400",
   subsets: ["latin"],
+  adjustFontFallback: false,
 });
 const Brand = ({ ...props }: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => {
   return (

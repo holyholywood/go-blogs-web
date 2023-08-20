@@ -9,7 +9,11 @@ const config: Config = {
         main: "max-width: 72rem",
       },
       colors: {
-        dark: "#171715",
+        dark: {
+          DEFAULT: "#171715",
+          hover: "#2a2927",
+          light: "#474643",
+        },
         primary: {
           DEFAULT: "#0369A1",
           hover: "#0C4A6E",
