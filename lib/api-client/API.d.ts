@@ -6,7 +6,7 @@ export type responseBodyType<T> = {
   status: boolean;
   statusCode: number;
   message: string;
-  payload: T;
+  payload: T | any;
   meta?: apiMetaType;
 };
 

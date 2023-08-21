@@ -11,7 +11,7 @@ const TopNavigationMenu = () => {
         const isActive = pathName === menu.url;
         return (
           <li key={index} className={`h-full`}>
-            <Link href={menu.url} className={`${isActive ? " border-b-2 " : ""} px-2 border-dark h-full flex items-center duration-300 hover:bg-gray-200 dark:hover:bg-dark-light`}>
+            <Link href={menu.url} className={`${isActive ? "border-dark" : "border-b-transparent"} px-2 border-b-2   h-full flex items-center duration-300 hover:bg-gray-200 dark:hover:bg-dark-light`}>
               {menu.name}
             </Link>
           </li>
@@ -29,7 +29,7 @@ const topMenu = [
     url: "/",
   },
   {
-    name: "Postingan Anda",
+    name: "Postingan Saya",
     url: "/posts",
   },
 ];

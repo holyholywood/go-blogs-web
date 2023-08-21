@@ -12,7 +12,7 @@ type linkPropsType = {
 
 const RouterLink = ({ href = "/", linkType = "underlined", linkSize = "md", ...props }: linkPropsType) => {
   return (
-    <Link href={href} className={` flex w-fit items-center ${generateLinkStyle(linkType, linkSize)} ${props.className}`}>
+    <Link href={href} className={`duration-200 flex w-fit items-center ${generateLinkStyle(linkType, linkSize)} ${props.className}`}>
       {props.children}
     </Link>
   );
@@ -25,8 +25,8 @@ const LinkButtonType = {
 
 const LinkButtonSize = {
   sm: "px-1 py-0.5 text-sm gap-1",
-  md: "px-4 py-2 text-base gap-2",
-  lg: "px-6 py-3 text-lg gap-4",
+  md: "px-3 py-1 text-base gap-2",
+  lg: "px-5 py-3 text-lg gap-4",
 };
 
 const linkFontSizeStyle = {

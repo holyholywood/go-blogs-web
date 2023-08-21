@@ -19,7 +19,7 @@ const SignInForm = () => {
         e.preventDefault();
         setIsLoading(true);
         const response = await AuthService.login(identity, password);
-
+        console.info(response);
         if (!response.status) {
           setErrMessage(response.message);
           setIsLoading(false);
@@ -43,9 +43,14 @@ const SignInForm = () => {
         <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="password" className="w-full block border rounded border-dark/50 focus:outline-sky-700 px-2 py-1" />
       </div>
       <div className="space-y-8 w-full ">
-        <Link href="/forgot-password" className="text-sm hover:text-sky-700 hover:underline font-light ml-auto block w-fit">
-          Lupa Password
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link href="/register" className="text-sm text-primary hover:text-sky-700 hover:underline font-light block w-fit">
+            Daftar
+          </Link>
+          <Link href="/forgot-password" className="text-sm text-primary hover:text-sky-700 hover:underline font-light block w-fit">
+            Lupa Password
+          </Link>
+        </div>
         <button disabled={isLoading} className="bg-primary hover:bg-primary-hover disabled:bg-primary-disabled duration-200 text-white px-4 py-1.5 rounded w-full">
           {isLoading ? <VscLoading className="animate-spin mx-auto text-2xl" /> : "Masuk"}{" "}
         </button>

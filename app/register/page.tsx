@@ -1,22 +1,22 @@
 import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import SignInForm from "./components/SignInForm";
+import RegisterForm from "./components/RegisterForm";
 import AppConfig from "@/config/app-config";
-import Brand from "../components/Brand";
 import Link from "next/link";
+import Brand from "../components/Brand";
 
 export const metadata: Metadata = {
-  title: "Log In" + AppConfig.PAGE_TITLE_APP_NAME,
+  title: "Register" + AppConfig.PAGE_TITLE_APP_NAME,
 };
-const SignInPage = () => {
+const RegisterPage = () => {
   return (
     <main className="flex min-h-screen gap-4 ">
       <div className="w-2/3 flex flex-col items-center justify-center gap-10 border-r">
-        <Image src="/assets/img/blog-view.png" alt="Blog View Illustrations" width={350} height={500} />
+        <Image src="/assets/img/come-in.png" alt="Come In Illustrations" width={350} height={500} />
         <p className="text-center w-1/2 max-w-lg text-dark/50">
-          Kami percaya bahwa kebebasan berpendapat adalah bagian dari hak hidup manusia. Karena di dalamnya selalu terdapat opini, perasaan dan inspirasi yang setiap kita sebagai manusia dapat bagikan
-          sebagai pengetahuan, pembelajaran dan pengalaman.
+          Berbagi pengalaman dan cerita adalah satu dari sekian banyak kegiatan yang selalu kita anggap mudah. Namun, percayalah penyimak ceritamu selalu merasakan hikmah dan manfaatnya. Siapapun
+          kamu, mulailah bercerita!
         </p>
       </div>
       <div className="w-1/3 flex flex-col items-center gap-4 md:px-32">
@@ -25,11 +25,11 @@ const SignInPage = () => {
             <Brand className="text-4xl " />
           </Link>
         </div>
-        <h1 className="text-xl font-semibold">Masuk</h1>
-        <SignInForm />
+        <h1 className="text-xl font-semibold">Daftar</h1>
+        <RegisterForm />
       </div>
     </main>
   );
 };
 
-export default SignInPage;
+export default RegisterPage;
