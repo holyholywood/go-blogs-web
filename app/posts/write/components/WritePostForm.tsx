@@ -10,12 +10,13 @@ import { VscLoading } from "react-icons/vsc";
 const ReactQuill = dynamic(() => import("react-quill"));
 import "react-quill/dist/quill.bubble.css";
 import SearchCategory from "./SearchCategory";
+import { postType, useCreatePost } from "@/model/Post";
+import Snackbar from "@/app/components/atoms/Snackbar";
 
 const WritePostFormQuill = () => {
-  const [outputText, setOutputText] = useState<string>("");
   const [withBanner, setWithBanner] = useState<boolean>(true);
   const [categories, setCategories] = useState<category[]>([]);
-  const [isPoem, setIsPoem] = useState<boolean>(false);
+  const { data, setData, isCreating, errMessage, handleCreate } = useCreatePost();
   const { handleUpload, handleDeleteUploaded, mediaPath, mediaName, isLoading } = useMediaService();
   return (
     <div className="space-y-4 pb-8">
@@ -28,6 +29,7 @@ const WritePostFormQuill = () => {
           <input type="checkbox" id="contentType" className="accent-primary" checked={withBanner} onChange={(e) => setWithBanner(e.target.checked)} />
         </div>
       </div>
+      <Snackbar message={errMessage} />
       {withBanner && (
         <>
           <label id="banner" className="rounded aspect-video overflow-hidden relative flex justify-center items-center">
@@ -44,7 +46,7 @@ const WritePostFormQuill = () => {
               onChange={async (e) => {
                 const files = e.target.files;
                 if (files) {
-                  await handleUpload(files[0]);
+                  setData({ ...data, banner: await handleUpload(files[0]) });
                 }
               }}
             />
@@ -58,8 +60,8 @@ const WritePostFormQuill = () => {
               Tipe Post
             </label>
             <select
-              onChange={(e) => (e.target.value === "poem" ? setIsPoem(true) : setIsPoem(false))}
-              value={isPoem ? "poem" : "article"}
+              onChange={(e) => setData({ ...data, type: e.target.value as postType })}
+              value={data.type}
               id="isPoem"
               className="bg-white block border rounded border-dark/50 focus:outline-sky-700 px-2 py-1"
             >
@@ -76,7 +78,7 @@ const WritePostFormQuill = () => {
             )}
           </div>
         </div>
-        <Input label={{ text: "Judul" }} placeholder="Judul Postingan (Opsional)" />
+        <Input label={{ text: "Judul" }} placeholder="Judul Postingan" onChange={(e) => setData({ ...data, title: e.target.value })} value={data.title ?? ""} />
         <div className="space-y-2">
           <label htmlFor="category" className="block">
             Kategori Post
@@ -93,7 +95,7 @@ const WritePostFormQuill = () => {
             id="category"
             onSelectValue={(val) => {
               setCategories([...categories, val]);
-              console.info(val);
+              setData({ ...data, categories: [...data.categories, val.id] });
             }}
           />
         </div>
@@ -108,13 +110,15 @@ const WritePostFormQuill = () => {
             theme={"bubble"}
             className="h-full [&>.ql-container]:min-h-[50vh]"
             id="body"
-            onChange={(e) => setOutputText(e)}
+            onChange={(e) => setData({ ...data, body: e })}
             style={{
               minHeight: "10rem",
             }}
           />
         </div>
-        <Button className="bg-primary text-white ml-auto">Submit</Button>
+        <Button disabled={isCreating} className="bg-primary disabled:bg-primary-disabled text-white ml-auto" onClick={handleCreate}>
+          {isCreating ? <VscLoading className="animate-spin mx-2 my-0.5" /> : "Submit"}
+        </Button>
       </div>
     </div>
   );

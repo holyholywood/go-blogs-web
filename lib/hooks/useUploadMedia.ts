@@ -27,15 +27,20 @@ const useMediaService = () => {
 
     const response = await Fetch.postFormData<uploadMediaResponseType>("/media/upload", formData);
 
-    console.info(response);
     if (response.status) {
+      setStatus(response.status);
+      setIsLoading(false);
+
       setMediaName(response.payload.media_name);
       setMediaPath(response.payload.media_path);
+      return response.payload.media_name;
     } else {
+      setStatus(response.status);
+      setIsLoading(false);
+
       setError(response.message);
+      return null;
     }
-    setStatus(response.status);
-    setIsLoading(false);
   };
 
   /**
