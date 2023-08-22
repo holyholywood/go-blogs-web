@@ -19,7 +19,6 @@ const SignInForm = () => {
         e.preventDefault();
         setIsLoading(true);
         const response = await AuthService.login(identity, password);
-        console.info(response);
         if (!response.status) {
           setErrMessage(response.message);
           setIsLoading(false);

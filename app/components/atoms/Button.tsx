@@ -19,7 +19,7 @@ const BtnType = {
 };
 
 const BtnSize: { [key: string]: string } = {
-  sm: "px-1 py-0.5 text-sm gap-1",
+  sm: "px-2 py-1 text-sm gap-1",
   md: "px-3 py-1 text-base gap-2",
   lg: "px-5 py-3 text-lg gap-4",
 };
