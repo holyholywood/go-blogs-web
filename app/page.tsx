@@ -1,20 +1,30 @@
 import AppConfig from "@/config/app-config";
 import { Metadata } from "next";
-import TopNavigation from "./components/TopNavigation";
-import SideNavigation from "./components/SideNavigation";
+import { post } from "@/model/Post";
+import { responseBodyType } from "@/lib/api-client/API";
+import MainLayout from "./components/template/MainLayout";
+import ArticleList from "./components/organisms/ArticleList";
 
 export const metadata: Metadata = {
   title: "Beranda" + AppConfig.PAGE_TITLE_APP_NAME,
 };
 
-export default function Home() {
+const getPostData = async (): Promise<responseBodyType<post[]>> => {
+  const res = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL_LOCAL + "/posts", {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+};
+
+export default async function Home() {
+  const { payload } = await getPostData();
   return (
-    <main className="w-full bg-white max-w-6xl mx-auto min-h-screen flex ">
-      <SideNavigation />
-      <section className="max-w-3xl w-full min-h-screen border-x">
-        <TopNavigation />
-        <div className="min-h-screen  w-full pt-8 px-4">ss</div>
-      </section>
-    </main>
+    <MainLayout className="pb-8">
+      <ArticleList posts={payload} />
+    </MainLayout>
   );
 }

@@ -23,7 +23,7 @@ const SignInForm = () => {
           setErrMessage(response.message);
           setIsLoading(false);
         } else {
-          router.push("/");
+          window.location.href = "/";
         }
       }}
     >

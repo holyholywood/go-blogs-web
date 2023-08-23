@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { cookieConfigOption } from "./cookie";
 import { cookieValueAdapter, generateCookieConfig } from "./utils";
 

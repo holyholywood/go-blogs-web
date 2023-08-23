@@ -1,41 +1,82 @@
+import CategoryChip from "@/app/components/atoms/CategoryChip";
 import Divider from "@/app/components/atoms/Divider";
 import MainLayout from "@/app/components/template/MainLayout";
 import AppConfig from "@/config/app-config";
+import InternalErrorExceptions from "@/exceptions/InternalErrorExceptions";
+import NotFoundExceptions from "@/exceptions/NotFoundExceptions";
 import { responseBodyType } from "@/lib/api-client/API";
+import { getRelativeTime } from "@/lib/helpers/date/moment";
 import imageHelpers from "@/lib/helpers/image";
 import { post } from "@/model/Post";
-import { cookies } from "next/headers";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
-import { RiHashtag } from "react-icons/ri";
+import { RiHashtag, RiMore2Fill } from "react-icons/ri";
+
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata({ params, searchParams }: Props, parent?: ResolvingMetadata): Promise<Metadata> {
+  const slug = params.slug;
+  const { payload } = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL_LOCAL + "/posts/" + slug).then((res) => res.json());
+
+  return {
+    title: payload.title + AppConfig.PAGE_TITLE_APP_NAME,
+  };
+}
+
 const getArticleData = async (slug: string): Promise<responseBodyType<post>> => {
   const res = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL_LOCAL + "/posts/" + slug);
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new InternalErrorExceptions("Failed to fetch datas");
   }
 
   return res.json();
 };
+
 const ReadPostPage = async ({ params }: { params: { slug: string } }) => {
-  const cookie = cookies().get(AppConfig.ACCESS_TOKEN_KEY);
-  const article = (await getArticleData(params.slug)).payload;
+  const post = (await getArticleData(params.slug)).payload;
 
   return (
     <MainLayout>
       <div className="space-y-8 pb-8">
-        <figure className="relative w-full rounded aspect-video overflow-hidden ">
-          <Image src={imageHelpers.getImageUrl(article.banner)} alt="post-banner" fill className="object-cover" />
-        </figure>
-        <h1 className="text-xl font-semibold">{article.title}</h1>
+        {post.banner && (
+          <>
+            <figure className="relative w-full rounded aspect-video overflow-hidden ">
+              <Image src={imageHelpers.getImageUrl(post.banner)} alt="post-banner" fill className="object-cover" />
+            </figure>{" "}
+          </>
+        )}
+
+        <h1 className="text-xl font-semibold">{post.title}</h1>
+        {post.banner && <Divider className="" />}
+        <section dangerouslySetInnerHTML={{ __html: post.body }} className={`text-sm`}></section>
         <div className="flex gap-4">
-          {article.categories.map((category, i) => (
-            <span key={i} className="text-xs px-2 py-1 border rounded-full inline-flex items-center  gap-2 text-dark-light">
-              <RiHashtag /> {category.category_name}
-            </span>
+          {post.categories.map((category, i) => (
+            <CategoryChip category_name={category.category_name} />
           ))}
         </div>
+        <div className="flex justify-between items-center mb-6">
+          <Link href={"/profile/" + post.creator.username} className="flex gap-3 items-center  w-fit">
+            <div className="rounded-full overflow-hidden flex justify-center items-center h-fit my-auto">
+              <Image
+                src={post.creator.avatar ? post.creator.avatar : `https://ui-avatars.com/api/?background=171715&color=fff&name=${post.creator.name.split(" ").join("+")}`}
+                alt="profilePicture"
+                width={35}
+                height={35}
+                quality={100}
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-semibold text-sm">{post.creator.name}</span>
+              <span className="text-dark-light text-xs">{getRelativeTime(post.created_at + "")}</span>
+            </div>
+          </Link>
+        </div>
         <Divider className="" />
-        <section dangerouslySetInnerHTML={{ __html: article.body }} className={`text-sm ${article.type === "article" && "[&>p]:indent-4"}`}></section>
         <section>Comment Should Here</section>
       </div>
     </MainLayout>

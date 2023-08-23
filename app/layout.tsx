@@ -1,8 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Open_Sans, Plus_Jakarta_Sans } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], adjustFontFallback: false });
+const openSans = Open_Sans({ subsets: ["latin"], adjustFontFallback: false });
+const jakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], adjustFontFallback: false });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth antialiased">
-      <body className={`${inter.className} text-dark dark:text-white`}>{children}</body>
+      <body className={`${jakartaSans.className} text-dark dark:text-white`}>{children}</body>
     </html>
   );
 }

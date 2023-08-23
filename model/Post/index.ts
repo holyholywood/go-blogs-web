@@ -6,6 +6,7 @@ export type post = {
   title: string | null;
   slug: string | null;
   body: string;
+  summary: string;
   banner: string | null;
   type: postType;
   creator_id: number;

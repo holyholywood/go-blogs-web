@@ -8,6 +8,7 @@ class JWT {
   }
 
   static serverParse<T>(token: string) {
+    if (!token) return null;
     const base64Token = token.split(".");
     const bodyToken = base64Token[1];
     const decodedBuffer = Buffer.from(bodyToken, "base64");

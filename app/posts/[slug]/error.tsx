@@ -1,8 +1,13 @@
 "use client";
-import React from "react";
+import { useEffect } from "react";
 
-const ReadPostErrorPage = () => {
-  return <div>ReadPostErrorPage</div>;
-};
-
-export default ReadPostErrorPage;
+export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  useEffect(() => {
+    console.info();
+  }, [error]);
+  return (
+    <div>
+      <button onClick={() => reset()}>Try again</button>
+    </div>
+  );
+}

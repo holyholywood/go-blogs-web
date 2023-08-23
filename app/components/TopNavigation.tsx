@@ -14,7 +14,7 @@ const TopNavigation = () => {
   const user = JWT.serverParse<AccessTokenBodyType>(token?.value as string);
   return (
     <div className="h-16 flex gap-8 px-4 sticky z-50 top-0 border-b dark:border-white bg-white dark:bg-dark">
-      <TopNavigationMenu />
+      <TopNavigationMenu isLogin={!!user} />
 
       {!token ? (
         <div className="ml-auto h-full flex justify-center items-center">
@@ -24,10 +24,10 @@ const TopNavigation = () => {
         </div>
       ) : (
         <Link href="/profile" className="flex gap-3 items-center ml-auto ">
-          <span className="text-dark-light font-semibold text-sm">Hi, {user.username}</span>
+          <span className="text-dark-light font-semibold text-sm">Hi, {user?.username}</span>
           <div className="rounded-full overflow-hidden flex justify-center items-center h-fit my-auto">
             <Image
-              src={user.avatar ? user.avatar : `https://ui-avatars.com/api/?background=171715&color=fff&name=${user.name.split(" ").join("+")}`}
+              src={user?.avatar ? user?.avatar : `https://ui-avatars.com/api/?background=171715&color=fff&name=${user?.name.split(" ").join("+")}`}
               alt="profilePicture"
               width={30}
               height={30}

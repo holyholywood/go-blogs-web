@@ -12,7 +12,7 @@ const config: Config = {
         dark: {
           DEFAULT: "#171715",
           hover: "#2a2927",
-          light: "#474643",
+          light: "#7e7e73",
         },
         primary: {
           DEFAULT: "#0369A1",
