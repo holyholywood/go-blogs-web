@@ -3,7 +3,6 @@ import Divider from "@/app/components/atoms/Divider";
 import MainLayout from "@/app/components/template/MainLayout";
 import AppConfig from "@/config/app-config";
 import InternalErrorExceptions from "@/exceptions/InternalErrorExceptions";
-import NotFoundExceptions from "@/exceptions/NotFoundExceptions";
 import { responseBodyType } from "@/lib/api-client/API";
 import { getRelativeTime } from "@/lib/helpers/date/moment";
 import imageHelpers from "@/lib/helpers/image";
