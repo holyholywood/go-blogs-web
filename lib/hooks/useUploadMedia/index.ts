@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import Fetch from "../api-client/base-api";
+import React, { useEffect, useState } from "react";
+import Fetch from "@/lib/api-client/base-api";
+import { getMediaUrl } from "./helpers";
 
 type uploadMediaResponseType = {
   media_name: string;
   media_path: string;
 };
 
-const useMediaService = () => {
-  const [mediaName, setMediaName] = useState<string>("");
-  const [mediaPath, setMediaPath] = useState<string>("");
+const useMediaService = (defaultMediaName?: string | null) => {
+  const [mediaName, setMediaName] = useState<string>(defaultMediaName ?? "");
+  const [mediaPath, setMediaPath] = useState<string>(getMediaUrl(defaultMediaName ?? null));
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [status, setStatus] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
@@ -60,6 +61,8 @@ const useMediaService = () => {
     setStatus(response.status);
     setIsLoading(false);
   };
+
+  useEffect(() => {}, [mediaName]);
 
   return {
     mediaName,

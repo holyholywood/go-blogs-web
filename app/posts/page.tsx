@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import AppConfig from "@/config/app-config";
 import { responseBodyType } from "@/lib/api-client/API";
 import { post } from "@/model/Post";
-import ArticleList from "../components/organisms/ArticleList";
+import ArticleList from "../components/organisms/PostList";
 import serverCookie from "@/lib/helpers/server-cookies";
 
 export const metadata: Metadata = {

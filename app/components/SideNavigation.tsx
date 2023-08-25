@@ -15,7 +15,7 @@ const SideNavigation = () => {
   const token = cookieStore.get(AppConfig.ACCESS_TOKEN_KEY);
   const user = JWT.serverParse<AccessTokenBodyType>(token?.value as string);
   return (
-    <aside className="max-w-xs w-full  sticky top-0 h-[calc(100vh-4rem)] max-h-screen space-y-8">
+    <aside className="max-w-xs w-full  sticky top-0 h-[calc(100vh-4rem)] max-h-screen space-y-8 hidden md:block">
       <div className="h-16 flex items-center justify-center">
         <Link href={"/"}>
           <Brand className="text-2xl mx-auto w-fit" />

@@ -5,6 +5,12 @@ class imageHelpers {
     }
     return process.env.NEXT_PUBLIC_BASE_API_URL + "/media/" + imageName;
   }
+
+  public static getMediaUrl(mediaName: string | null) {
+    if (!mediaName) return "";
+
+    return process.env.NEXT_PUBLIC_BASE_API_URL + "/media/" + mediaName;
+  }
 }
 
 export default imageHelpers;

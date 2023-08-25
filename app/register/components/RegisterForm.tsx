@@ -54,11 +54,12 @@ const SignInForm = () => {
         </label>
         <input
           value={registerData.username}
-          onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
+          onChange={(e) => e.target.value.length <= 16 && setRegisterData({ ...registerData, username: e.target.value.replace(/\s+/g, "") })}
           type="text"
           id="identity"
           className="w-full block border rounded border-dark/50 focus:outline-sky-700 px-2 py-1"
         />
+        <span className="text-xs text-dark-light">{registerData.username.length}/16 Karakter</span>
       </div>
       <div className="space-y-2  w-full">
         <label htmlFor="identity" className="block">

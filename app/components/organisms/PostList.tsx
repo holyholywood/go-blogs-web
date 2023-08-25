@@ -1,16 +1,16 @@
-import ArticleItem from "@/app/home/components/ArticleItem";
+import PostItem from "@/app/home/components/PostItem";
 import { post } from "@/model/Post";
 import React from "react";
-type articleListProps = {
+type postListProps = {
   posts: post[];
 };
-const ArticleList = ({ posts }: articleListProps) => {
+const PostList = ({ posts }: postListProps) => {
   return (
     <div className="space-y-4 ">
       {posts.length > 0 ? (
         <>
           {posts.map((post) => (
-            <ArticleItem {...post} key={post.id} />
+            <PostItem {...post} key={post.id} />
           ))}
         </>
       ) : (
@@ -23,4 +23,4 @@ const ArticleList = ({ posts }: articleListProps) => {
   );
 };
 
-export default ArticleList;
+export default PostList;

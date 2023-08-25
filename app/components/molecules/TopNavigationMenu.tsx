@@ -9,7 +9,7 @@ type TopNavigationMenuProps = {
 const TopNavigationMenu = ({ isLogin }: TopNavigationMenuProps) => {
   const pathName = usePathname();
   return (
-    <ul className="flex text-lg font-semibold">
+    <ul className="flex md:text-lg font-semibold">
       {topMenu
         .filter((el) => (isLogin ? el : !el.guarded))
         .map((menu, index) => {
@@ -18,7 +18,7 @@ const TopNavigationMenu = ({ isLogin }: TopNavigationMenuProps) => {
             <li key={index} className={`h-full`}>
               <Link
                 href={menu.url}
-                className={`${isActive ? "border-dark" : "border-b-transparent"} px-2 border-b-2   h-full flex items-center duration-300 hover:bg-gray-200 dark:hover:bg-dark-light`}
+                className={`${isActive ? "border-dark" : "border-b-transparent"} px-2 border-b-2 truncate h-full flex items-center duration-300 hover:bg-gray-200 dark:hover:bg-dark-light`}
               >
                 {menu.name}
               </Link>
@@ -38,7 +38,7 @@ const topMenu = [
     guarded: false,
   },
   {
-    name: "Postingan Saya",
+    name: "Post Saya",
     url: "/posts",
     guarded: true,
   },

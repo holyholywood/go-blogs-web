@@ -1,5 +1,6 @@
 import CategoryChip from "@/app/components/atoms/CategoryChip";
 import Divider from "@/app/components/atoms/Divider";
+import ImagePreview from "@/app/components/molecules/ImagePreview";
 import MainLayout from "@/app/components/template/MainLayout";
 import AppConfig from "@/config/app-config";
 import InternalErrorExceptions from "@/exceptions/InternalErrorExceptions";
@@ -11,14 +12,12 @@ import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { RiHashtag, RiMore2Fill } from "react-icons/ri";
 
 type Props = {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata({ params, searchParams }: Props, parent?: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = params.slug;
   const { payload } = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL_LOCAL + "/posts/" + slug).then((res) => res.json());
 
@@ -45,14 +44,14 @@ const ReadPostPage = async ({ params }: { params: { slug: string } }) => {
         {post.banner && (
           <>
             <figure className="relative w-full rounded aspect-video overflow-hidden ">
-              <Image src={imageHelpers.getImageUrl(post.banner)} alt="post-banner" fill className="object-cover" />
-            </figure>{" "}
+              <ImagePreview src={imageHelpers.getImageUrl(post.banner)} alt="post-banner" fill className="object-cover" caption={post.title ?? ""} />
+            </figure>
           </>
         )}
 
         <h1 className="text-xl font-semibold">{post.title}</h1>
         {post.banner && <Divider className="" />}
-        <section dangerouslySetInnerHTML={{ __html: post.body }} className={`text-sm`}></section>
+        <section dangerouslySetInnerHTML={{ __html: post.body }} className={`text-sm ${post.type === "poem" && "[&>p]:min-h-[1.5rem] whitespace-pre-line"}`}></section>
         <div className="flex gap-4">
           {post.categories.map((category, i) => (
             <CategoryChip category_name={category.category_name} />

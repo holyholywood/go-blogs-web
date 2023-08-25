@@ -1,14 +1,16 @@
 import React from "react";
+import { VscLoading } from "react-icons/vsc";
 
 type buttonPropsType = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
   btnType?: "rounded" | "default";
   btnSize?: "sm" | "md" | "lg";
+  isLoading?: boolean;
 };
 
-const Button = ({ btnType = "default", btnSize = "md", ...props }: buttonPropsType) => {
+const Button = ({ btnType = "default", btnSize = "md", isLoading, ...props }: buttonPropsType) => {
   return (
-    <button {...props} className={`${BtnSize[btnSize]} ${BtnType[btnType]} flex items-center ${props.className}`}>
-      {props.children}
+    <button {...props} className={`${BtnSize[btnSize]} ${BtnType[btnType]} flex items-center duration-200 ${props.className}`} disabled={props.disabled || isLoading}>
+      {isLoading ? <VscLoading className={`animate-spin text-lg`} /> : props.children}
     </button>
   );
 };

@@ -3,7 +3,7 @@ import AppConfig from "@/config/app-config";
 import cookie from "@/lib/helpers/cookie";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { RiLogoutBoxRFill, RiLogoutBoxRLine } from "react-icons/ri";
+import { RiLogoutBoxRLine, RiSearchLine } from "react-icons/ri";
 
 const SideActionMenu = () => {
   const router = useRouter();
@@ -14,6 +14,12 @@ const SideActionMenu = () => {
   }
   return (
     <>
+      <li>
+        <button onClick={handleLogout} className={`w-full flex items-center gap-2 text-dark-light dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-dark-hover py-2 pl-2`}>
+          <RiSearchLine className="text-xl" />
+          Cari
+        </button>
+      </li>
       <li>
         <button onClick={handleLogout} className={`w-full flex items-center gap-2 text-dark-light dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-dark-hover py-2 pl-2`}>
           <RiLogoutBoxRLine className="text-xl" />

@@ -1,28 +1,31 @@
 import React from "react";
-import MainLayout from "../components/template/MainLayout";
+import MainLayout from "@/app/components/template/MainLayout";
 import serverCookie from "@/lib/helpers/server-cookies";
 import AppConfig from "@/config/app-config";
 import userService from "@/services/user-service";
 import Image from "next/image";
-import RouterLink from "../components/atoms/RouterLink";
+import RouterLink from "@/app/components/atoms/RouterLink";
 import { user } from "@/model/User";
 import { getRelativeTime } from "@/lib/helpers/date/moment";
-import { RiEditBoxLine } from "react-icons/ri";
+import { RiAddLine, RiEditBoxLine } from "react-icons/ri";
 import { Metadata } from "next";
 import imageHelpers from "@/lib/helpers/image";
+import Button from "@/app/components/atoms/Button";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const token = serverCookie.get(AppConfig.ACCESS_TOKEN_KEY);
-  const user: user & { created_at: string } = await userService.getMyProfile(token);
+type Props = {
+  params: { username: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const user: user & { created_at: string } = await userService.getUserProfile(params.username);
 
   return {
     title: user.name + "'s Profile" + AppConfig.PAGE_TITLE_APP_NAME,
   };
 }
 
-const ProfilePage = async () => {
-  const token = serverCookie.get(AppConfig.ACCESS_TOKEN_KEY);
-  const user: user & { created_at: string } = await userService.getMyProfile(token);
+const ProfilePage = async ({ params }: { params: { username: string } }) => {
+  const user: user & { created_at: string } = await userService.getUserProfile(params.username);
   if (!user) return "user error";
   return (
     <MainLayout>
@@ -38,15 +41,17 @@ const ProfilePage = async () => {
             />
           </figure>
           <div className="space-y-1">
-            <h3 className="text-xl font-semibold">{user.name}</h3>
+            <h3 className="text-xl font-semibold">
+              {user.name} {params.username}
+            </h3>
             <span className="text-base tracking-wide text-dark-hover">@{user.username}</span>
             <h1 className="text-xs text-dark-light">Anggota sejak {getRelativeTime(user.created_at)}</h1>
           </div>
           <div className="ml-auto ">
-            <RouterLink linkType="default" className="text-primary hover:text-primary-hover gap-2 text-sm font-light" href="/profile/edit">
-              <RiEditBoxLine className="text-xl text-decoration-none" />
-              Edit Profil
-            </RouterLink>
+            <Button btnType="default" className="text-white bg-primary hover:bg-primary-hover">
+              <RiAddLine className="text-xl text-decoration-none" />
+              Ikuti
+            </Button>
           </div>
         </div>
         <div className="px-1 space-y-2">

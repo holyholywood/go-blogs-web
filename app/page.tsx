@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { post } from "@/model/Post";
 import { responseBodyType } from "@/lib/api-client/API";
 import MainLayout from "./components/template/MainLayout";
-import ArticleList from "./components/organisms/ArticleList";
+import ArticleList from "./components/organisms/PostList";
 
 export const metadata: Metadata = {
   title: "Beranda" + AppConfig.PAGE_TITLE_APP_NAME,
