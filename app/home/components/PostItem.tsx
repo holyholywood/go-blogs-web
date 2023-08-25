@@ -41,7 +41,6 @@ const PostItem = ({ ...post }: PostItemProps) => {
           <ImagePreview src={imageHelpers.getImageUrl(post.banner)} alt={post.slug + "-banner"} fill className="object-cover" caption={post.title ?? ""} />
         </figure>
       )}
-
       <h3 className="text-base md:text-lg font-semibold">{post.title}</h3>
       <p className="py-2 md:text-sm">{post.summary + `${post.summary.length >= 150 && "..."}`}</p>
       <div className="flex gap-4">

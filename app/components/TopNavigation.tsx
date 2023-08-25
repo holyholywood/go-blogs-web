@@ -9,8 +9,6 @@ import { cookies } from "next/headers";
 import { AccessTokenBodyType } from "@/lib/helpers/jwt/jwt";
 import imageHelpers from "@/lib/helpers/image";
 import SmallScreenMenu from "./molecules/SmallScreenMenu";
-import Divider from "./atoms/Divider";
-import { RiSearchLine } from "react-icons/ri";
 
 const TopNavigation = () => {
   const cookieStore = cookies();
@@ -19,7 +17,7 @@ const TopNavigation = () => {
   return (
     <>
       <div className="h-16 flex gap-8 px-4 sticky z-50 top-0 border-b dark:border-white bg-white dark:bg-dark min-w-[20rem]">
-        <SmallScreenMenu />
+        <SmallScreenMenu isLogin={!!user} />
         <TopNavigationMenu isLogin={!!user} />
 
         {!token ? (

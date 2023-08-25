@@ -2,7 +2,7 @@ import React from "react";
 import MainLayout from "@/app/components/template/MainLayout";
 import serverCookie from "@/lib/helpers/server-cookies";
 import AppConfig from "@/config/app-config";
-import userService from "@/services/user-service";
+import userService from "@/server/user-service";
 import { user } from "@/model/User";
 import { Metadata } from "next";
 import EditProfileForm from "./components/EditProfileForm";

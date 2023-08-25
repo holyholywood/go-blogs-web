@@ -1,13 +1,12 @@
 import React from "react";
 import MainLayout from "@/app/components/template/MainLayout";
-import serverCookie from "@/lib/helpers/server-cookies";
 import AppConfig from "@/config/app-config";
-import userService from "@/services/user-service";
+import userService from "@/server/user-service";
 import Image from "next/image";
 import RouterLink from "@/app/components/atoms/RouterLink";
 import { user } from "@/model/User";
 import { getRelativeTime } from "@/lib/helpers/date/moment";
-import { RiAddLine, RiEditBoxLine } from "react-icons/ri";
+import { RiAddLine } from "react-icons/ri";
 import { Metadata } from "next";
 import imageHelpers from "@/lib/helpers/image";
 import Button from "@/app/components/atoms/Button";

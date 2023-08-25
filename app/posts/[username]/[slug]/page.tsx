@@ -75,7 +75,7 @@ const ReadPostPage = async ({ params }: { params: { slug: string } }) => {
           </Link>
         </div>
         <Divider className="" />
-        <section>Comment Should Here</section>
+        {/* <section>Comment Should Here</section> */}
       </div>
     </MainLayout>
   );
