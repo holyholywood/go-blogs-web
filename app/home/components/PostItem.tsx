@@ -45,7 +45,7 @@ const PostItem = ({ ...post }: PostItemProps) => {
       <p className="py-2 md:text-sm">{post.summary + `${post.summary.length >= 150 && "..."}`}</p>
       <div className="flex gap-4">
         {post.categories.map((category, i) => (
-          <CategoryChip category_name={category.category_name} />
+          <CategoryChip key={i} category_name={category.category_name} />
         ))}
       </div>
       <div className="flex items-center justify-end">

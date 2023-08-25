@@ -20,6 +20,7 @@ const ImagePreview = ({ ...props }: ImagePreviewProps) => {
         onClick={() => {
           setIsPreviewOpen(true);
         }}
+        alt={props.alt}
         className={props.className + " cursor-pointer"}
       />
 

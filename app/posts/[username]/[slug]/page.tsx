@@ -54,7 +54,7 @@ const ReadPostPage = async ({ params }: { params: { slug: string } }) => {
         <section dangerouslySetInnerHTML={{ __html: post.body }} className={`text-sm ${post.type === "poem" && "[&>p]:min-h-[1.5rem] whitespace-pre-line"}`}></section>
         <div className="flex gap-4">
           {post.categories.map((category, i) => (
-            <CategoryChip category_name={category.category_name} />
+            <CategoryChip key={i} category_name={category.category_name} />
           ))}
         </div>
         <div className="flex justify-between items-center mb-6">
