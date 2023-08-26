@@ -9,7 +9,7 @@ const brandFont = Alfa_Slab_One({
 });
 const Brand = ({ ...props }: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => {
   return (
-    <h1 {...props} style={{ ...brandFont.style }}>
+    <h1 {...props} style={{ ...brandFont.style }} className={`${props.className} text-center`}>
       {AppConfig.APP_NAME}
     </h1>
   );

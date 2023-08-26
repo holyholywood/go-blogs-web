@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-const SideNavigationMenu = () => {
+const SideNavigationMenu = ({ isLogin }: { isLogin: boolean }) => {
   const pathName = usePathname();
   return (
     <>
-      {PublicPageMenus.map((menu, index) => {
+      {PublicPageMenus.filter((menu) => (isLogin ? menu.url !== "/" : menu.url !== "/profile" && menu.url !== "/")).map((menu, index) => {
         const Icon = menu.icon;
         const isActive = pathName === menu.url;
         return (

@@ -12,14 +12,14 @@ export const metadata: Metadata = {
 const RegisterPage = () => {
   return (
     <main className="flex min-h-screen gap-4 ">
-      <div className="w-2/3 flex flex-col items-center justify-center gap-10 border-r">
+      <div className="w-1/2 xl:w-2/3 hidden lg:flex flex-col items-center justify-center gap-10 border-r">
         <Image src="/assets/img/come-in.png" alt="Come In Illustrations" width={350} height={500} />
-        <p className="text-center w-1/2 max-w-lg text-dark/50">
+        <p className="text-center ww-full xl:w-1/2 max-w-lg text-dark/50">
           Berbagi pengalaman dan cerita adalah satu dari sekian banyak kegiatan yang selalu kita anggap mudah. Namun, percayalah penyimak ceritamu selalu merasakan hikmah dan manfaatnya. Siapapun
           kamu, mulailah bercerita!
         </p>
       </div>
-      <div className="w-1/3 flex flex-col items-center gap-4 md:px-32">
+      <div className="w-full lg:w-1/2 xl:w-1/3 flex flex-col items-center gap-4 px-4 md:px-32">
         <div className="flex justify-center items-center h-64">
           <Link href="/">
             <Brand className="text-4xl " />

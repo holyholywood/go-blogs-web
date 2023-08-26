@@ -12,14 +12,14 @@ export const metadata: Metadata = {
 const SignInPage = () => {
   return (
     <main className="flex min-h-screen gap-4 ">
-      <div className="w-2/3 flex flex-col items-center justify-center gap-10 border-r">
+      <div className="w-1/2 xl:w-2/3 hidden lg:flex flex-col items-center justify-center gap-10 border-r">
         <Image src="/assets/img/blog-view.png" alt="Blog View Illustrations" width={350} height={500} />
-        <p className="text-center w-1/2 max-w-lg text-dark/50">
+        <p className="text-center  max-w-lg text-dark/50">
           Kami percaya bahwa kebebasan berpendapat adalah bagian dari hak hidup manusia. Karena di dalamnya selalu terdapat opini, perasaan dan inspirasi yang setiap kita sebagai manusia dapat bagikan
           sebagai pengetahuan, pembelajaran dan pengalaman.
         </p>
       </div>
-      <div className="w-1/3 flex flex-col items-center gap-4 md:px-32">
+      <div className="w-full lg:w-1/2 xl:w-1/3 flex flex-col items-center gap-4 px-4 md:px-32">
         <div className="flex justify-center items-center h-64">
           <Link href="/">
             <Brand className="text-4xl " />

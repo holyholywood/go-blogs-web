@@ -9,7 +9,7 @@ type TopNavigationMenuProps = {
 const TopNavigationMenu = ({ isLogin }: TopNavigationMenuProps) => {
   const pathName = usePathname();
   return (
-    <ul className="flex md:text-lg font-semibold">
+    <ul className="hidden md:flex md:text-lg font-semibold">
       {topMenu
         .filter((el) => (isLogin ? el : !el.guarded))
         .map((menu, index) => {

@@ -20,10 +20,27 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = params.slug;
-  const { payload } = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL_LOCAL + "/posts/" + slug).then((res) => res.json());
-
+  const { payload }: responseBodyType<post> = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL_LOCAL + "/posts/" + slug).then((res) => res.json());
+  const keywordGenerator = payload.type === "article" ? ["artikel", "article"] : ["poem", "puisi"];
+  const description = `${keywordGenerator[0]} by ${payload.creator.name}`;
   return {
     title: payload.title + AppConfig.PAGE_TITLE_APP_NAME,
+    description: description,
+    keywords: ["ditotisi", ...keywordGenerator, payload.creator.name, ...payload.categories.map((category) => category.category_name)],
+    openGraph: {
+      type: "article",
+      title: payload.title ?? "post-title",
+      description: payload.summary,
+      images: imageHelpers.getMediaUrl(payload.banner),
+      url: `https://nge-blog.ditotisi.com/post/${payload.creator.username}/${payload.slug}`,
+    },
+    twitter: {
+      title: payload.title ?? "post-title",
+      description: payload.summary,
+      images: imageHelpers.getMediaUrl(payload.banner),
+      creator: payload.creator.name,
+      site: `https://nge-blog.ditotisi.com/post/${payload.creator.username}/${payload.slug}`,
+    },
   };
 }
 

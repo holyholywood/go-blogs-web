@@ -22,7 +22,7 @@ const SideNavigation = () => {
         </Link>
       </div>
       <ul className="pl-4">
-        <SideNavigationMenu />
+        <SideNavigationMenu isLogin={!!user} />
       </ul>
 
       {user && (
@@ -35,13 +35,14 @@ const SideNavigation = () => {
           </ul>
         </>
       )}
-
-      <div className="absolute bottom-20 w-full">
-        <RouterLink href="/posts/write" linkType="button-rounded" className="mx-auto hover:bg-primary-hover bg-primary text-white">
-          <RiPencilLine />
-          Tulis Postingan
-        </RouterLink>
-      </div>
+      {!!user && (
+        <div className="absolute bottom-20 w-full">
+          <RouterLink href="/posts/write" linkType="button-rounded" className="mx-auto hover:bg-primary-hover bg-primary text-white">
+            <RiPencilLine />
+            Tulis Postingan
+          </RouterLink>
+        </div>
+      )}
     </aside>
   );
 };

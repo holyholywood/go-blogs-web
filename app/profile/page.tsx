@@ -59,7 +59,7 @@ const ProfilePage = async () => {
             </RouterLink>
           )}
         </div>
-        <div className="grid grid-cols-3 gap-4 pt-8">
+        <div className=" grid-cols-3 gap-4 pt-8 hidden">
           <div className="border rounded shadow w-full h-full p-4 px-6  space-y-3">
             <h5 className="text-sm text-dark-hover">Total Post</h5>
             <p className="text-2xl font-semibold">20</p>

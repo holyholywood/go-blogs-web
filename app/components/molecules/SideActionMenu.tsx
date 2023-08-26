@@ -15,7 +15,7 @@ const SideActionMenu = () => {
   return (
     <>
       <li>
-        <button onClick={handleLogout} className={`w-full flex items-center gap-2 text-dark-light dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-dark-hover py-2 pl-2`}>
+        <button disabled onClick={handleLogout} className={`w-full flex items-center gap-2 text-dark-light dark:text-gray-50  py-2 pl-2`}>
           <RiSearchLine className="text-xl" />
           Cari
         </button>
@@ -23,7 +23,7 @@ const SideActionMenu = () => {
       <li>
         <button onClick={handleLogout} className={`w-full flex items-center gap-2 text-dark-light dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-dark-hover py-2 pl-2`}>
           <RiLogoutBoxRLine className="text-xl" />
-          Logout
+          Keluar
         </button>
       </li>
     </>

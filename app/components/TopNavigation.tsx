@@ -18,6 +18,7 @@ const TopNavigation = () => {
     <>
       <div className="h-16 flex gap-8 px-4 sticky z-50 top-0 border-b dark:border-white bg-white dark:bg-dark min-w-[20rem]">
         <SmallScreenMenu isLogin={!!user} />
+
         <TopNavigationMenu isLogin={!!user} />
 
         {!token ? (
