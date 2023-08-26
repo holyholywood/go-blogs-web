@@ -6,9 +6,10 @@ import imageHelpers from "@/lib/helpers/image";
 import Image from "next/image";
 import Link from "next/link";
 import { getRelativeTime } from "@/lib/helpers/date/moment";
-import { post } from "@/model/Post";
+import { post, postType } from "@/model/Post";
 import { RiMore2Fill } from "react-icons/ri";
 import AuthService from "@/server/authentication-service";
+import { fontSerif } from "@/lib/resource/fonts";
 
 type PostItemProps = {} & post;
 
@@ -42,13 +43,14 @@ const PostItem = ({ ...post }: PostItemProps) => {
         </figure>
       )}
       <h3 className="text-base md:text-lg font-semibold">{post.title}</h3>
-      <p className="py-2 md:text-sm">{post.summary + `${post.summary.length >= 150 && "..."}`}</p>
+      <p className={`py-2 md:text-sm ${fontSerif.className}`}>{post.summary + `${post.summary.length >= 150 && "..."}`}</p>
       <div className="flex gap-4">
         {post.categories.map((category, i) => (
           <CategoryChip key={i} category_name={category.category_name} />
         ))}
       </div>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-between">
+        <span className="font-extralight italic">{convertPostTypeLang(post.type)}</span>
         <RouterLink href={`/posts/${post.creator.username}/${post.slug}`} linkType="button" className="bg-primary hover:bg-primary-hover duration-200 text-white w-fit">
           Baca
         </RouterLink>
@@ -58,3 +60,13 @@ const PostItem = ({ ...post }: PostItemProps) => {
 };
 
 export default PostItem;
+
+const convertPostTypeLang = (type: postType) => {
+  switch (type) {
+    case "article":
+      return "Artikel";
+
+    default:
+      return "Puisi";
+  }
+};

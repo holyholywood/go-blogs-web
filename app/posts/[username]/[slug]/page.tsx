@@ -7,6 +7,7 @@ import InternalErrorExceptions from "@/exceptions/InternalErrorExceptions";
 import { responseBodyType } from "@/lib/api-client/API";
 import { getRelativeTime } from "@/lib/helpers/date/moment";
 import imageHelpers from "@/lib/helpers/image";
+import { fontSerif } from "@/lib/resource/fonts";
 import { post } from "@/model/Post";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
@@ -48,10 +49,9 @@ const ReadPostPage = async ({ params }: { params: { slug: string } }) => {
             </figure>
           </>
         )}
-
         <h1 className="text-xl font-semibold">{post.title}</h1>
         {post.banner && <Divider className="" />}
-        <section dangerouslySetInnerHTML={{ __html: post.body }} className={`text-sm ${post.type === "poem" && "[&>p]:min-h-[1.5rem] whitespace-pre-line"}`}></section>
+        <section dangerouslySetInnerHTML={{ __html: post.body }} className={`text-sm ${fontSerif.className} ${post.type === "poem" && "[&>p]:min-h-[1.5rem] whitespace-pre-line"}`}></section>
         <div className="flex gap-4">
           {post.categories.map((category, i) => (
             <CategoryChip key={i} category_name={category.category_name} />
@@ -61,7 +61,7 @@ const ReadPostPage = async ({ params }: { params: { slug: string } }) => {
           <Link href={"/profile/" + post.creator.username} className="flex gap-3 items-center  w-fit">
             <div className="rounded-full overflow-hidden flex justify-center items-center h-fit my-auto">
               <Image
-                src={post.creator.avatar ? post.creator.avatar : `https://ui-avatars.com/api/?background=171715&color=fff&name=${post.creator.name.split(" ").join("+")}`}
+                src={post.creator.avatar ? imageHelpers.getMediaUrl(post.creator.avatar) : `https://ui-avatars.com/api/?background=171715&color=fff&name=${post.creator.name.split(" ").join("+")}`}
                 alt="profilePicture"
                 width={35}
                 height={35}

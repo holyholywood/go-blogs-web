@@ -21,7 +21,7 @@ const useCreatePost = () => {
     try {
       const response = await Fetch.post<post>("/posts", data);
       if (response.status) {
-        router.push("/posts/" + response.payload.slug);
+        router.push("/posts/" + response.payload.creator.username + "/" + response.payload.slug);
       }
     } catch (error: any) {
       setErrMessage(error.message);
