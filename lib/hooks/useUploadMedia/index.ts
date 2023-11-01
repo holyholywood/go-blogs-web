@@ -51,6 +51,7 @@ const useMediaService = (defaultMediaName?: string | null) => {
   const handleDeleteUploaded = async (mediaName: string) => {
     setIsLoading(true);
 
+    const deleteResult = await Fetch.delete("/profile/avatar");
     const response = await Fetch.delete<string>("/media/" + mediaName);
     if (response.status) {
       setMediaName("");
