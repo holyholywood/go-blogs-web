@@ -14,7 +14,7 @@ const useEditUserProfile = (user: user) => {
       ...userData,
     });
     if (res.status) {
-      window.location.href = "/profile";
+      router.push("/profile");
     } else {
       setErrMessage(res.message);
       setIsUpdating(false);

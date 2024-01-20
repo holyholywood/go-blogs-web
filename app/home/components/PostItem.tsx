@@ -21,7 +21,11 @@ const PostItem = ({ ...post }: PostItemProps) => {
         <Link href={"/profile/" + (user?.id === post.creator_id ? "" : post.creator.username)} className="flex gap-3 items-center  w-fit">
           <div className="rounded-full overflow-hidden flex justify-center items-center h-fit my-auto">
             <Image
-              src={post.creator.avatar ? imageHelpers.getMediaUrl(post.creator.avatar) : `https://ui-avatars.com/api/?background=171715&color=fff&name=${post.creator.name.split(" ").join("+")}`}
+              src={
+                post.creator.avatar
+                  ? imageHelpers.getMediaUrl(post.creator.avatar)
+                  : `https://ui-avatars.com/api/?background=171715&color=fff&name=${post.creator.name.split(" ").join("+")}`
+              }
               alt="profilePicture"
               width={35}
               height={35}
@@ -39,7 +43,13 @@ const PostItem = ({ ...post }: PostItemProps) => {
       </div>
       {post.banner && (
         <figure className="relative w-full aspect-video rounded overflow-hidden">
-          <ImagePreview src={imageHelpers.getImageUrl(post.banner)} alt={post.slug + "-banner"} fill className="object-cover" caption={post.title ?? ""} />
+          <ImagePreview
+            src={imageHelpers.getImageUrl(post.banner)}
+            alt={post.slug + "-banner"}
+            fill
+            className="object-cover"
+            caption={post.title ?? ""}
+          />
         </figure>
       )}
       <h3 className="text-base md:text-lg font-semibold">{post.title}</h3>
@@ -51,7 +61,11 @@ const PostItem = ({ ...post }: PostItemProps) => {
       </div>
       <div className="flex items-center justify-between">
         <span className="font-extralight italic">{convertPostTypeLang(post.type)}</span>
-        <RouterLink href={`/posts/${post.creator.username}/${post.slug}`} linkType="button" className="bg-primary hover:bg-primary-hover duration-200 text-white w-fit">
+        <RouterLink
+          href={`/posts/${post.creator.username}/${post.slug}`}
+          linkType="button"
+          className="bg-primary hover:bg-primary-hover duration-200 text-white w-fit"
+        >
           Baca
         </RouterLink>
       </div>

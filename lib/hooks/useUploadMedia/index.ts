@@ -32,9 +32,9 @@ const useMediaService = (defaultMediaName?: string | null) => {
       setStatus(response.status);
       setIsLoading(false);
 
-      setMediaName(response.payload.media_name);
+      setMediaName(response.payload.media_path);
       setMediaPath(response.payload.media_path);
-      return response.payload.media_name;
+      return response.payload.media_path;
     } else {
       setStatus(response.status);
       setIsLoading(false);
@@ -53,13 +53,9 @@ const useMediaService = (defaultMediaName?: string | null) => {
 
     const deleteResult = await Fetch.delete("/profile/avatar");
     const response = await Fetch.delete<string>("/media/" + mediaName);
-    if (response.status) {
-      setMediaName("");
-      setMediaPath("");
-    } else {
-      setError(response.message);
-    }
-    setStatus(response.status);
+
+    setMediaName("");
+    setMediaPath("");
     setIsLoading(false);
   };
 

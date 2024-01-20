@@ -23,7 +23,11 @@ const TopNavigation = () => {
 
         {!token ? (
           <div className="ml-auto h-full flex justify-center items-center">
-            <RouterLink linkType="button" href="/signin" className="bg-white hover:bg-primary hover:text-white border border-primary text-primary font-semibold">
+            <RouterLink
+              linkType="button"
+              href="/signin"
+              className="bg-white hover:bg-primary hover:text-white border border-primary text-primary font-semibold"
+            >
               Log In
             </RouterLink>
           </div>
@@ -32,7 +36,11 @@ const TopNavigation = () => {
             <span className="text-dark-light font-semibold text-sm truncate">Hi, {user?.username}</span>
             <div className="rounded-full overflow-hidden flex justify-center items-center h-fit my-auto">
               <Image
-                src={user?.avatar ? imageHelpers.getMediaUrl(user?.avatar) : `https://ui-avatars.com/api/?background=171715&color=fff&name=${user?.name.split(" ").join("+")}`}
+                src={
+                  user?.avatar
+                    ? imageHelpers.getMediaUrl(user?.avatar)
+                    : `https://ui-avatars.com/api/?background=171715&color=fff&name=${user?.name.split(" ").join("+")}`
+                }
                 alt="profilePicture"
                 width={30}
                 height={30}
